@@ -1,5 +1,5 @@
 ---
-name: CONDAENV
+name: CONDA_ENV
 channels:
   - defaults
 
