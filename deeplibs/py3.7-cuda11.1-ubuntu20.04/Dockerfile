@@ -18,7 +18,7 @@ RUN set -exu \
 ARG WORKDIR="/workspace"
 ARG CONDA_DIR="/conda"
 ARG CONDA_GROUP="conda"
-ARG CONDA_ENV="py37-pytorch19"
+ARG CONDA_ENV="py37-cuda111"
 ARG CONDA_VERSION="py37_4.10.3"
 ARG CONDA_SHA256SUM="a1a7285dea0edc430b2bc7951d89bb30a2a1b32026d2a7b02aacaaa95cf69c7c"
 
