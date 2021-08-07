@@ -9,27 +9,27 @@ IMAGE_PREFIX:=$(DOCKER_REPOSITORY)/$(REPO_USERNAME)
 SHA_HEAD:=$(shell git rev-parse --short HEAD)
 DATE_NOW:=$(shell date +%Y-%m-%dT%H:%M:%S%z)
 
-PYTORCH_CUDA_NAME:=pytorch
-PYTORCH_CUDA_TAG:=1.9.0-py3.7-cuda11.1-ubuntu20.04
-PYTORCH_CUDA_FOLDER:=$(PYTORCH_CUDA_NAME)/$(PYTORCH_CUDA_TAG)
-PYTORCH_CUDA_IMAGE:=$(IMAGE_PREFIX)/$(PYTORCH_CUDA_NAME):$(PYTORCH_CUDA_TAG)
+DEEPLIBS_NAME:=deeplibs
+DEEPLIBS_TAG:=py3.7-cuda11.1-ubuntu20.04
+DEEPLIBS_FOLDER:=$(DEEPLIBS_NAME)/$(DEEPLIBS_TAG)
+DEEPLIBS_IMAGE:=$(IMAGE_PREFIX)/$(DEEPLIBS_NAME):$(DEEPLIBS_TAG)
 
 # Build section
 
-.PHONY: build build-pytorch-cuda
+.PHONY: build build-deeplibs
 
-build: build-pytorch-cuda
+build: build-deeplibs
 
-build-pytorch-cuda:
-	$(info -- Building docker image $(PYTORCH_CUDA_IMAGE))
-	docker image build -t $(PYTORCH_CUDA_IMAGE) -f $(PYTORCH_CUDA_FOLDER)/Dockerfile $(PYTORCH_CUDA_FOLDER)
+build-deeplibs:
+	$(info -- Building docker image $(DEEPLIBS_IMAGE))
+	docker image build -t $(DEEPLIBS_IMAGE) -f $(DEEPLIBS_FOLDER)/Dockerfile $(DEEPLIBS_FOLDER)
 
 # Clean section
 
-.PHONY: clean clean-pytorch-cuda
+.PHONY: clean clean-deeplibs
 
-clean: clean-pytorch-cuda
+clean: clean-deeplibs
 
-clean-pytorch-cuda:
-	$(info -- Cleaning docker image $(PYTORCH_CUDA_IMAGE))
-	docker image rm $(PYTORCH_CUDA_IMAGE)
+clean-deeplibs:
+	$(info -- Cleaning docker image $(DEEPLIBS_IMAGE))
+	docker image rm $(DEEPLIBS_IMAGE)
