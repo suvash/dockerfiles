@@ -10,7 +10,7 @@ SHA_HEAD:=$(shell git rev-parse --short HEAD)
 DATE_NOW:=$(shell date +%Y-%m-%dT%H:%M:%S%z)
 
 DEEPLIBS_NAME:=deeplibs
-DEEPLIBS_TAG:=py3.7-cuda11.1-ubuntu20.04
+DEEPLIBS_TAG:=py3.7-cuda11.1-ubuntu20.04-$(SHA_HEAD)
 DEEPLIBS_FOLDER:=$(DEEPLIBS_NAME)/$(DEEPLIBS_TAG)
 DEEPLIBS_IMAGE:=$(IMAGE_PREFIX)/$(DEEPLIBS_NAME):$(DEEPLIBS_TAG)
 
