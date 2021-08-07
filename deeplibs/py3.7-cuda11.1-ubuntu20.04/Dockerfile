@@ -48,13 +48,22 @@ RUN sed -i "s/CONDA_ENV/$CONDA_ENV/g" "/tmp/$CONDA_ENV/environment.yml" \
     && sg "$CONDA_GROUP" -c "conda env create -f /tmp/$CONDA_ENV/environment.yml" \
     && echo "conda activate $CONDA_ENV" >> "$HOME/.bashrc"
 
-COPY ./requirements.txt "/tmp/$CONDA_ENV/requirements.txt"
+COPY ./pytorch.requirements.txt "/tmp/$CONDA_ENV/pytorch.requirements.txt"
 RUN set -exu \
     \
     && . "$CONDA_DIR/etc/profile.d/conda.sh" \
     && conda activate "$CONDA_ENV" \
     && sg "$CONDA_GROUP" -c "pip install --no-cache-dir \
-                                         -r /tmp/$CONDA_ENV/requirements.txt \
+                                         -r /tmp/$CONDA_ENV/pytorch.requirements.txt \
                                          -f https://download.pytorch.org/whl/torch_stable.html"
+
+COPY ./jax.requirements.txt "/tmp/$CONDA_ENV/jax.requirements.txt"
+RUN set -exu \
+    \
+    && . "$CONDA_DIR/etc/profile.d/conda.sh" \
+    && conda activate "$CONDA_ENV" \
+    && sg "$CONDA_GROUP" -c "pip install --no-cache-dir \
+                                         -r /tmp/$CONDA_ENV/jax.requirements.txt \
+                                         -f https://storage.googleapis.com/jax-releases/jax_releases.html"
 
 WORKDIR "$WORKDIR"
