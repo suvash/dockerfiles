@@ -66,4 +66,12 @@ RUN set -exu \
                                          -r /tmp/$CONDA_ENV/jax.requirements.txt \
                                          -f https://storage.googleapis.com/jax-releases/jax_releases.html"
 
+COPY ./triton.requirements.txt "/tmp/$CONDA_ENV/triton.requirements.txt"
+RUN set -exu \
+    \
+    && . "$CONDA_DIR/etc/profile.d/conda.sh" \
+    && conda activate "$CONDA_ENV" \
+    && sg "$CONDA_GROUP" -c "pip install --no-cache-dir \
+                                         -r /tmp/$CONDA_ENV/triton.requirements.txt"
+
 WORKDIR "$WORKDIR"
